@@ -1,4 +1,30 @@
 ---
 - hosts: ec2
+<<<<<<< HEAD
   roles:
     - win-service-validation
+=======
+  vars:
+    - ansible_user: Administrator
+    - ansible_password: Password
+    - ansible_port: 5986
+    - ansible_connection: winrm
+    - ansible_winrm_server_cert_validation: ignore
+
+  tasks:
+    - name: Validation of vervices
+      win_service:
+        name: "{{item}}"
+        state: started
+      register: status
+      with_items:
+       - MSSQLSERVER
+       - Netman
+  
+    - set_fact:
+        state_fact: "{{status.results | first }}"
+        catchable: yes
+
+    - debug:
+        var: state_fact.state 
+>>>>>>> a3df6709ecedafa188a38e0a48d84cd47c80c47a
