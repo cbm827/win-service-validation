@@ -1,0 +1,4 @@
+---
+# tasks file for win-servic-validation
+- import_tasks: validation.yml pkg="{{item}}"
+  with_items: pkglist

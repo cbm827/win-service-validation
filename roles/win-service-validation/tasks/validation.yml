@@ -1,0 +1,12 @@
+- name: Validation of vervices
+      win_service:
+        name: "{{pkg}}"
+        state: started
+      register: status
+  
+- set_fact:
+    state_fact: "{{status.results | first }}"
+    catchable: yes
+
+- debug:
+    var: state_fact.state 
