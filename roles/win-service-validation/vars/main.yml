@@ -7,3 +7,5 @@ ansible_connection: winrm
 ansible_winrm_server_cert_validation: ignore
 pkglist: ["MSSQLSERVER", "Netman"]
 
+import_var_files:
+  vault.yml
