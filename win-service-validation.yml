@@ -1,0 +1,25 @@
+---
+- hosts: ec2
+  vars:
+    - ansible_user: Administrator
+    - ansible_password: x9;Te(?*k(dS*%noZxBjYXcREpP%-Y4@
+    - ansible_port: 5986
+    - ansible_connection: winrm
+    - ansible_winrm_server_cert_validation: ignore
+
+  tasks:
+    - name: Validation of vervices
+      win_service:
+        name: "{{item}}"
+        state: started
+      register: status
+      with_items:
+       - MSSQLSERVER
+       - Netman
+  
+    - set_fact:
+        state_fact: "{{status.results | first }}"
+        catchable: yes
+
+    - debug:
+        var: state_fact.state 
